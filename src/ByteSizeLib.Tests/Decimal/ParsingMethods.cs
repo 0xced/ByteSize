@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using FluentAssertions;
 using Xunit;
 
 namespace ByteSizeLib.Tests.Decimal
@@ -6,70 +7,93 @@ namespace ByteSizeLib.Tests.Decimal
     public class ParsingMethods
     {
         [Fact]
+        public void ParseKb()
+        {
+            var result = ByteSize.Parse("1020Kb");
+
+            result.Should().Be(ByteSize.FromKiloBits(1020));
+        }
+
+        [Fact]
         public void ParseKB()
         {
-            string val = "1020KB";
-            var expected = ByteSize.FromKiloBytes(1020);
+            var result = ByteSize.Parse("1020KB");
 
-            var result = ByteSize.Parse(val);
+            result.Should().Be(ByteSize.FromKiloBytes(1020));
+        }
 
-            Assert.Equal(expected, result);
+        [Fact]
+        public void ParseMb()
+        {
+            var result = ByteSize.Parse("1000Mb");
+
+            result.Should().Be(ByteSize.FromMegaBits(1000));
         }
 
         [Fact]
         public void ParseMB()
         {
-            string val = "1000MB";
-            var expected = ByteSize.FromMegaBytes(1000);
+            var result = ByteSize.Parse("1000MB");
 
-            var result = ByteSize.Parse(val);
+            result.Should().Be(ByteSize.FromMegaBytes(1000));
+        }
 
-            Assert.Equal(expected, result);
+        [Fact]
+        public void ParseGb()
+        {
+            var result = ByteSize.Parse("805Gb");
+
+            result.Should().Be(ByteSize.FromGigaBits(805));
         }
 
         [Fact]
         public void ParseGB()
         {
-            string val = "805GB";
-            var expected = ByteSize.FromGigaBytes(805);
+            var result = ByteSize.Parse("805GB");
 
-            var result = ByteSize.Parse(val);
+            result.Should().Be(ByteSize.FromGigaBytes(805));
+        }
 
-            Assert.Equal(expected, result);
+        [Fact]
+        public void ParseTb()
+        {
+            var result = ByteSize.Parse("100Tb");
+
+            result.Should().Be(ByteSize.FromTeraBits(100));
         }
 
         [Fact]
         public void ParseTB()
         {
-            string val = "100TB";
-            var expected = ByteSize.FromTeraBytes(100);
+            var result = ByteSize.Parse("100TB");
 
-            var result = ByteSize.Parse(val);
+            result.Should().Be(ByteSize.FromTeraBytes(100));
+        }
 
-            Assert.Equal(expected, result);
+        [Fact]
+        public void ParsePb()
+        {
+            var result = ByteSize.Parse("100Pb");
+
+            result.Should().Be(ByteSize.FromPetaBits(100));
         }
 
         [Fact]
         public void ParsePB()
         {
-            string val = "100PB";
-            var expected = ByteSize.FromPetaBytes(100);
+            var result = ByteSize.Parse("100PB");
 
-            var result = ByteSize.Parse(val);
-
-            Assert.Equal(expected, result);
+            result.Should().Be(ByteSize.FromPetaBytes(100));
         }
 
         [Fact]
         public void ParseCultureNumberSeparator()
         {
             CultureInfo.CurrentCulture = new CultureInfo("de-DE");
-            string val = "1.500,5 MB";
-            var expected = ByteSize.FromMegaBytes(1500.5);
 
-            var result = ByteSize.Parse(val);
+            var result = ByteSize.Parse("1.500,5 MB");
 
-            Assert.Equal(expected, result);
+            result.Should().Be(ByteSize.FromMegaBytes(1500.5));
             
             CultureInfo.CurrentCulture = new CultureInfo("en-US");
         }

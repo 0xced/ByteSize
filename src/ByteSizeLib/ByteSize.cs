@@ -592,40 +592,78 @@ namespace ByteSizeLib
                     return FromBytes(number);
             }
 
-            switch (sizePart.ToLowerInvariant())
+            switch (sizePart)
             {
-                // Binary
-                case "kib":
+                // Binary - byte
+                case KibiByteSymbol:
                     return FromKibiBytes(number);
-
-                case "mib":
+                case MebiByteSymbol:
                     return FromMebiBytes(number);
-
-                case "gib":
+                case GibiByteSymbol:
                     return FromGibiBytes(number);
-
-                case "tib":
+                case TebiByteSymbol:
                     return FromTebiBytes(number);
-
-                case "pib":
+                case PebiByteSymbol:
                     return FromPebiBytes(number);
 
-                // Decimal
-                case "kb":
+                // Binary - bit
+                // https://en.wikipedia.org/wiki/Kibibit -- The unit symbol of the kibibit is Kibit.
+                case "Kb":
+                case "Kibit":
+                    return FromKibiBits(number);
+                // https://en.wikipedia.org/wiki/Mebibit -- The unit symbol of the mebibit is Mibit.
+                case "Mb":
+                case "Mibit":
+                    return FromMebiBits(number);
+                // https://en.wikipedia.org/wiki/Gibibit -- The gibibit (symbol Gibit)
+                case "Gibit":
+                    return FromGibiBits(number);
+                // https://en.wikipedia.org/wiki/Tebibit -- The unit symbol of the tebibit is Tibit.
+                case "Tibit":
+                    return FromTebiBits(number);
+                // https://en.wikipedia.org/wiki/Pebibit -- The unit symbol of the pebibit is Pibit-
+                case "Pibit":
+                    return FromPebiBits(number);
+
+                // Decimal - byte
+                // https://en.wikipedia.org/wiki/Kilobyte -- The internationally recommended unit symbol for the kilobyte is kB.
+                case "kB":
+                case KiloByteSymbol:
                     return FromKiloBytes(number);
-
-                case "mb":
+                // https://en.wikipedia.org/wiki/Megabyte -- Its recommended unit symbol is MB.
+                case MegaByteSymbol:
                     return FromMegaBytes(number);
-
-                case "gb":
+                // https://en.wikipedia.org/wiki/Gigabyte -- The unit symbol for the gigabyte is GB.
+                case GigaByteSymbol:
                     return FromGigaBytes(number);
-
-                case "tb":
+                // https://en.wikipedia.org/wiki/Byte#Multiple-byte_units -- 1000^4	TB terabyte
+                case TeraByteSymbol:
                     return FromTeraBytes(number);
-
-                case "pb":
+                // https://en.wikipedia.org/wiki/Byte#Multiple-byte_units -- 1000^5 PB petabyte
+                case PetaByteSymbol:
                     return FromPetaBytes(number);
                 
+                // Decimal - bit
+                // https://en.wikipedia.org/wiki/Kilobit -- The kilobit has the unit symbol kbit or kb.
+                case "kb":
+                case "kbit":
+                    return FromKiloBits(number);
+                // https://en.wikipedia.org/wiki/Megabit -- The megabit has the unit symbol Mbit.
+                case "Mbit":
+                    return FromMegaBits(number);
+                // https://en.wikipedia.org/wiki/Gigabit -- The gigabit has the unit symbol Gbit or Gb.
+                case "Gb":
+                case "Gbit":
+                    return FromGigaBits(number);
+                // https://en.wikipedia.org/wiki/Terabit -- The terabit has the unit symbol Tbit or Tb.
+                case "Tb":
+                case "Tbit":
+                    return FromTeraBits(number);
+                // https://en.wikipedia.org/wiki/Petabit -- The petabit has the unit symbol Pbit or Pb.
+                case "Pb":
+                case "Pbit":
+                    return FromPetaBits(number);
+
                 default:
                     throw new FormatException($"Bytes of magnitude '{sizePart}' is not supported.");
             }

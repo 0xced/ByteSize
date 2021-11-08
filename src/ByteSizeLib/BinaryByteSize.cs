@@ -20,6 +20,21 @@ namespace ByteSizeLib
         /// <summary>Number of bytes in 1 pebibyte.</summary>
         public const long BytesInPebiByte = 1_125_899_906_842_624;
 
+        /// <summary>Number of bytes in 1 kibibit.</summary>
+        public const long BytesInKibiBit = 1_024 / 8;
+
+        /// <summary>Number of bytes in 1 mebibit.</summary>
+        public const long BytesInMebiBit = 1_024 * BytesInKibiBit;
+
+        /// <summary>Number of bytes in 1 gibibit.</summary>
+        public const long BytesInGibiBit = 1_024 * BytesInMebiBit;
+
+        /// <summary>Number of bytes in 1 tebibit.</summary>
+        public const long BytesInTebiBit = 1_024 * BytesInGibiBit;
+
+        /// <summary>Number of bytes in 1 pebibit.</summary>
+        public const long BytesInPebiBit = 1_024 * BytesInTebiBit;
+
         /// <summary>Kibibyte symbol.</summary>
         public const string KibiByteSymbol = "KiB";
         
@@ -84,6 +99,16 @@ namespace ByteSizeLib
         {
             return new ByteSize(value * BytesInPebiByte);
         }
+
+        public static ByteSize FromKibiBits(double value) => new ByteSize(value * BytesInKibiBit);
+
+        public static ByteSize FromMebiBits(double value) => new ByteSize(value * BytesInMebiBit);
+
+        public static ByteSize FromGibiBits(double value) => new ByteSize(value * BytesInGibiBit);
+
+        public static ByteSize FromTebiBits(double value) => new ByteSize(value * BytesInTebiBit);
+
+        public static ByteSize FromPebiBits(double value) => new ByteSize(value * BytesInPebiBit);
 
         /// <inheritdoc cref="Add" />
         /// <param name="value">Number of kibibytes (1 KiB = 1024 B).</param>

@@ -17,6 +17,21 @@ namespace ByteSizeLib
         /// <summary>Number of bytes in 1 petabyte.</summary>
         public const long BytesInPetaByte = 1_000_000_000_000_000;
 
+        /// <summary>Number of bytes in 1 kilobit.</summary>
+        public const long BytesInKiloBit = 1_000 / 8;
+
+        /// <summary>Number of bytes in 1 megabit.</summary>
+        public const long BytesInMegaBit = 1_000 * BytesInKiloBit;
+
+        /// <summary>Number of bytes in 1 gigabit.</summary>
+        public const long BytesInGigaBit = 1_000 * BytesInMegaBit;
+
+        /// <summary>Number of bytes in 1 terabit.</summary>
+        public const long BytesInTeraBit = 1_000 * BytesInGigaBit;
+
+        /// <summary>Number of bytes in 1 petabit.</summary>
+        public const long BytesInPetaBit = 1_000 * BytesInTeraBit;
+
         /// <summary>Kilobyte symbol.</summary>
         public const string KiloByteSymbol = "KB";
         
@@ -77,6 +92,16 @@ namespace ByteSizeLib
         {
             return new ByteSize(value * BytesInPetaByte);
         }
+
+        public static ByteSize FromKiloBits(double value) => new ByteSize(value * BytesInKiloBit);
+
+        public static ByteSize FromMegaBits(double value) => new ByteSize(value * BytesInMegaBit);
+
+        public static ByteSize FromGigaBits(double value) => new ByteSize(value * BytesInGigaBit);
+
+        public static ByteSize FromTeraBits(double value) => new ByteSize(value * BytesInTeraBit);
+
+        public static ByteSize FromPetaBits(double value) => new ByteSize(value * BytesInPetaBit);
 
         /// <inheritdoc cref="Add" />
         /// <param name="value">Number of kilobytes (1 KB = 1000 B).</param>
